@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load custom_filters %}
+
+{% block reporte_cliente %}
+
+<main>
+  <div class="container-fluid px-4">
+    </a>
+        <h1 class="mt-4">
+            Reportes
+            <i class="bi bi-file-earmark-text"></i>
+        </h1>
+      <ol class="breadcrumb mb-4">
+          <li class="breadcrumb-item"><a href="{% url 'ver_clientes' %}">Ver Clientes</a></li>
+          <li class="breadcrumb-item active">Reportes</li>
+      </ol>
+
+      <div class="card mb-4">
+          <div class="card-header">
+              <i class="fas fa-table me-1"></i>
+              Tabla de Reportes - {{ cliente.nombre_completo }}
+          </div>
+          <div class="card-body">
+            <table id="datatablesSimple">
+              <thead>
+                  <tr>
+                      <th>Descripcion</th>
+                      <th>Fecha del reporte</th>
+                      <th>Acciones</th>
+                  </tr>
+              </thead>
+              <tfoot>
+                  <tr>
+                    <th>Descripcion</th>
+                    <th>Fecha del reporte</th>
+                    <th>Acciones</th>
+                  </tr> 
+              </tfoot>
+              <tbody>
+                {% for reporte in reportes %}
+                    <tr>
+                        <td>{{ reporte.descripcion }}</td>
+                        <td>
+                            {{ reporte.fecha_de_creacion }} 
+                        </td>
+                        <td>
+                            <a href="{% url 'editar_reporte' reporte_id=reporte.id %}">
+                                <i class="fas fa-edit"></i> Editar Reporte
+                            </a>                               
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+            
+            
+            
+               
+            </table>
+          </div>
+      </div>
+  </div>
+</main>
+<footer class="py-4 bg-light mt-auto">
+  <div class="container-fluid px-4">
+      <div class="d-flex align-items-center justify-content-between small">
+          <div class="text-muted">Derechos de autor &copy; Tu pagina web 2023</div>
+          <div>
+              <a href="#">Politica de privacidad</a>
+              &middot;
+              <a href="#">Terminos &amp; Condiciones</a>
+          </div>
+      </div>
+  </div>
+</footer>
+{% endblock %}
+

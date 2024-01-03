@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block agregar_cliente %}
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">
+            <i class="bi bi-file-earmark-plus"></i>
+            Agregar Reporte
+        </h1>
+          
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'ver_clientes' %}">Ver Clientes</a></li>
+            <li class="breadcrumb-item active">Agregar Reporte</li>
+        </ol>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Añadir Reporte - {{ cliente.nombre_completo }}
+            </div>
+            <div class="container mt-4">
+                <form class="row mb-3" method="post" action="{% url 'agregar_reporte' cliente_id=cliente.id %}">
+                    {% csrf_token %}
+                    <label for="inputAddress4" class="col-sm-3 col-form-label">{{ form.descripcion.label_tag }}</label>
+                    <div class="col-sm-9">
+                        {{ form.descripcion }}
+                    </div>
+                    <div class="col-sm-9">
+                        <button type="submit" class="btn btn-primary px-5">Agregar Reporte</button>
+                    </div>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+<footer class="py-4 bg-light mt-auto">
+    <div class="container-fluid px-4">
+        <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted">Derechos de autor &copy; Tu sitio web 2023</div>
+            <div>
+                <a href="#">Politica de privacidad</a>
+                &middot;
+                <a href="#">Terminos &amp; Condiciones</a>
+            </div>
+        </div>
+    </div>
+  </footer>
+{% endblock %}
+
+
+
+
+

@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+        /* Estilos en línea para la tabla */
+        td.seguimiento-informacion_enviada { color: #ED0423; }
+        td.seguimiento-cliente_interesado { color: #34D1BF; }
+        td.seguimiento-pendiente_por_llamar { color: #0496FF; }
+        td.seguimiento-no_contesta { color: #6665DD; }
+        td.seguimiento-no_interesado { color: #F17105; }
+        td.seguimiento-por_enviar_deposito { color: #F105E8; }
+        td.seguimiento-venta_exitoso { color: #11C80D; }
+        td.seguimiento-default { color: #000000; } /* Color predeterminado si no coincide con ninguna opción */
+    </style>
+{% block table_clients %}
+
+<main>
+  <div class="container-fluid px-4">
+    <h1 class="mt-4">
+        Clientes
+        <i class="bi bi-people-fill"></i>
+    </h1>
+    <ol class="breadcrumb mb-4">
+      <li class="breadcrumb-item"><a href="{% url 'ver_clientes' %}">Ver Clientes</a></li>
+      <li class="breadcrumb-item active">Tablas</li>
+    </ol>
+
+      <div class="card mb-4">
+          <div class="card-header">
+              <i class="fas fa-table me-1"></i>
+              Tabla de Clientes
+          </div>
+          <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>Celular</th>
+                        <th>Nombre</th>
+                        <th>Cuidad</th>
+                        <th>Descripcion</th>
+                        <th>Seguimiento</th>
+                        <th>Procedencia del Prospecto</th>
+                        <th>Fecha</th>
+                        {% if user.is_authenticated and user.is_superuser %}
+                            <th>Asociado a</th>
+                        {% endif %}
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Celular</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Cuidad</th>
+                        <th>Seguimiento</th>
+                        <th>Procedencia del Prospecto</th>
+                        <th>Fecha</th>
+                        {% if user.is_authenticated and user.is_superuser %}
+                            <th>Asociado a</th>
+                        {% endif %}
+                        <th>Acciones</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    {% for cliente in clientes %}
+                    <tr>
+                        <td>{{ cliente.celular }}</td>
+                        <td>{{ cliente.nombre_completo }}</td>
+                        <td>{{ cliente.lugar_de_origen }}</td>
+                        <td>{{ cliente.descripcion }}</td>
+                        <td>{{ cliente.get_seguimiento_display }}</td>
+                        <td>{{ cliente.get_origen_del_prospecto_display }}</td>
+                        <td>{{ cliente.fecha_de_creacion|date:"Y-m-d" }}</td>
+        
+                        {% if user.is_authenticated and user.is_superuser %}
+                            <td>
+                                {% if cliente.asesor_coordinador.asesor %}
+                                    Asesor - {{ cliente.asesor_coordinador.asesor.usuario.username }}
+                                {% elif cliente.asesor_coordinador.coordinador %}
+                                    Coordinador - {{ cliente.asesor_coordinador.coordinador.usuario.username }}
+                                {% endif %}
+                            </td>
+                        {% endif %}
+                        
+                        <td>                        
+                            <div class="table-actions d-flex align-items-center gap-3 fs-6">
+                                <a href="{% url 'ver_reportes' cliente_id=cliente.id %}" class="text-primary" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Ver Reportes"><i class="bi bi-eye-fill"></i></a>
+                                <a href="{% url 'editar_cliente' cliente_id=cliente.id %}" class="text-warning" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Editar Cliente"><i class="bi bi-pencil-fill"></i></a>
+                                <a href="{% url 'agregar_reporte' cliente_id=cliente.id %}" class="text-success" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Agregar Reportes"><i class="bi bi-plus-circle-fill"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>         
+            </table>
+        </div>
+        
+      </div>
+  </div>
+</main>
+<footer class="py-4 bg-light mt-auto">
+  <div class="container-fluid px-4">
+      <div class="d-flex align-items-center justify-content-between small">
+          <div class="text-muted">Derechos de autor &copy;Tu sitio web 2023</div>
+          <div>
+              <a href="#">Politica de privacidad</a>
+              &middot;
+              <a href="#">Terminos &amp; Condiciones</a>
+          </div>
+      </div>
+  </div>
+</footer>
+{% endblock %}
+

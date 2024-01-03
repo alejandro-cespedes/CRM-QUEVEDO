@@ -1,0 +1,547 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" class="semi-dark">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>CRM Quevedo</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="{% static 'css/style.min.css' %}" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-...tu-código-de-integridad..." crossorigin="anonymous" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <link rel="icon" href="{% static 'assets/images/favicon-32x32.png' %}" type="image/png" />
+    <!--plugins-->
+    <link href="{% static 'assets/plugins/vectormap/jquery-jvectormap-2.0.2.css' %}" rel="stylesheet"/>
+    <link href="{% static 'assets/plugins/simplebar/css/simplebar.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/plugins/metismenu/css/metisMenu.min.css' %}" rel="stylesheet" />
+    <!-- Bootstrap CSS -->
+    <link href="{% static 'assets/css/bootstrap.min.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/bootstrap-extended.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/icons.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iK7l5iSekVbSGP1r3CowgHYgFQQFiKgJxRTZKx6bSSUnQlmh/jiS"
+    crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T6DOU9KzQ6jW9nOxV8Z2WQKkcPGeIM8r+3SHJo/CY1fE7syVkVs9m+gWPIfjC2j" crossorigin="anonymous">
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-dT3OrqM5LGpXfjD71/JUQeP3XMz4+KjZC+33Nvl8s0Mw5rHQW5yH5R6/2dY5C9NEH6AbJ9oA8bgnwXvpL/GPmQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- loader-->
+    <link href="{% static 'assets/css/pace.min.css' %}" rel="stylesheet" />
+
+    <!--Theme Styles-->
+    <link href="{% static 'assets/css/dark-theme.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/light-theme.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/semi-dark.css' %}" rel="stylesheet" />
+    <link href="{% static 'assets/css/header-colors.css' %}" rel="stylesheet" />
+
+</head>
+
+<body>
+     <!--start wrapper-->
+  <div class="wrapper">
+    <!--start top header-->
+      <header class="top-header">        
+        <nav class="navbar navbar-expand gap-3">
+          <div class="mobile-toggle-icon fs-3 d-flex d-lg-none">
+              <i class="bi bi-list"></i>
+            </div>
+            <form class="searchbar">
+                <div class="position-absolute top-50 translate-middle-y search-icon ms-3"><i class="bi bi-search"></i></div>
+                <input class="form-control" type="text" placeholder="Escriba aqui para buscar">
+                <div class="position-absolute top-50 translate-middle-y search-close-icon"><i class="bi bi-x-lg"></i></div>
+            </form>
+            <div class="top-navbar-right ms-auto">
+              <ul class="navbar-nav align-items-center gap-1">
+                <li class="nav-item search-toggle-icon d-flex d-lg-none">
+                  <a class="nav-link" href="javascript:;">
+                    <div class="">
+                      <i class="bi bi-search"></i>
+                    </div>
+                  </a>
+               </li>
+            <li class="nav-item dropdown dropdown-laungauge d-none d-sm-flex">
+          <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="javascript:;" data-bs-toggle="dropdown">
+            <img src="{% static 'county/02.png' %}" width="22" alt="">
+          </a>
+          <ul class="dropdown-menu dropdown-menu-end p-2">
+            <!-- Language options -->
+            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="{% static 'county/01.png' %}" width="20" alt=""><span class="ms-2">English</span></a></li>
+            <li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="{% static 'county/02.png' %}" width="20" alt=""><span class="ms-2">Catalan</span></a></li>
+						<li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="assets/images/county/03.png" width="20" alt=""><span class="ms-2">French</span></a>
+						</li>
+						<li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="assets/images/county/04.png" width="20" alt=""><span class="ms-2">Belize</span></a>
+						</li>
+						<li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="assets/images/county/05.png" width="20" alt=""><span class="ms-2">Colombia</span></a>
+						</li>
+						<li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="assets/images/county/06.png" width="20" alt=""><span class="ms-2">Spanish</span></a>
+						</li>
+						<li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="assets/images/county/07.png" width="20" alt=""><span class="ms-2">Georgian</span></a>
+						</li>
+						<li><a class="dropdown-item d-flex align-items-center py-2" href="javascript:;"><img src="assets/images/county/08.png" width="20" alt=""><span class="ms-2">Hindi</span></a>
+						</li>
+					</ul>
+				</li>
+			   <li class="nav-item dark-mode d-none d-sm-flex">
+                  <a class="nav-link dark-mode-icon" href="javascript:;">
+                    <div class="">
+                      <i class="bi bi-moon-fill"></i>
+                    </div>
+                  </a>
+               </li>
+              <li class="nav-item dropdown dropdown-large">
+                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+                  <div class="projects">
+                    <i class="bi bi-grid-3x3-gap-fill"></i>
+                  </div>
+                </a>
+                <div class="dropdown-menu dropdown-menu-end">
+                   <div class="row row-cols-3 gx-2">
+                      <div class="col">
+                        <a href="ecommerce-orders.html">
+                         <div class="apps p-2 radius-10 text-center">
+                            <div class="apps-icon-box mb-1 text-white bg-gradient-purple">
+                              <i class="bi bi-basket2-fill"></i>
+                            </div>
+                            <p class="mb-0 apps-name">Orders</p>
+                         </div>
+                        </a>
+                      </div>
+                      <div class="col">
+                        <a href="javascript:;">
+                        <div class="apps p-2 radius-10 text-center">
+                           <div class="apps-icon-box mb-1 text-white bg-gradient-info">
+                            <i class="bi bi-people-fill"></i>
+                           </div>
+                           <p class="mb-0 apps-name">Users</p>
+                        </div>
+                      </a>
+                     </div>
+                     <div class="col">
+                      <a href="ecommerce-products-grid.html">
+                      <div class="apps p-2 radius-10 text-center">
+                         <div class="apps-icon-box mb-1 text-white bg-gradient-success">
+                          <i class="bi bi-trophy-fill"></i>
+                         </div>
+                         <p class="mb-0 apps-name">Products</p>
+                      </div>
+                      </a>
+                    </div>
+                    <div class="col">
+                      <a href="component-media-object.html">
+                      <div class="apps p-2 radius-10 text-center">
+                         <div class="apps-icon-box mb-1 text-white bg-gradient-danger">
+                          <i class="bi bi-collection-play-fill"></i>
+                         </div>
+                         <p class="mb-0 apps-name">Media</p>
+                      </div>
+                      </a>
+                    </div>
+                    <div class="col">
+                      <a href="pages-user-profile.html">
+                      <div class="apps p-2 radius-10 text-center">
+                         <div class="apps-icon-box mb-1 text-white bg-gradient-warning">
+                          <i class="bi bi-person-circle"></i>
+                         </div>
+                         <p class="mb-0 apps-name">Account</p>
+                       </div>
+                      </a>
+                    </div>
+                    <div class="col">
+                      <a href="javascript:;">
+                      <div class="apps p-2 radius-10 text-center">
+                         <div class="apps-icon-box mb-1 text-white bg-gradient-voilet">
+                          <i class="bi bi-file-earmark-text-fill"></i>
+                         </div>
+                         <p class="mb-0 apps-name">Docs</p>
+                      </div>
+                      </a>
+                    </div>
+                    <div class="col">
+                      <a href="ecommerce-orders-detail.html">
+                      <div class="apps p-2 radius-10 text-center">
+                         <div class="apps-icon-box mb-1 text-white bg-gradient-branding">
+                          <i class="bi bi-credit-card-fill"></i>
+                         </div>
+                         <p class="mb-0 apps-name">Payment</p>
+                      </div>
+                      </a>
+                    </div>
+                    <div class="col">
+                      <a href="javascript:;">
+                      <div class="apps p-2 radius-10 text-center">
+                         <div class="apps-icon-box mb-1 text-white bg-gradient-desert">
+                          <i class="bi bi-calendar-check-fill"></i>
+                         </div>
+                         <p class="mb-0 apps-name">Events</p>
+                      </div>
+                    </a>
+                    </div>
+                    <div class="col">
+                      <a href="javascript:;">
+                      <div class="apps p-2 radius-10 text-center">
+                         <div class="apps-icon-box mb-1 text-white bg-gradient-amour">
+                          <i class="bi bi-book-half"></i>
+                         </div>
+                         <p class="mb-0 apps-name">Story</p>
+                        </div>
+                      </a>
+                    </div>
+                   </div><!--end row-->
+                </div>
+              </li>
+              <li class="nav-item dropdown dropdown-large">
+
+                <div class="dropdown-menu dropdown-menu-end p-0">
+                  
+                <div class="p-2">
+                  <div><hr class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">
+                      <div class="text-center">View All Messages</div>
+                    </a>
+                </div>
+               </div>
+              </li>
+              <li class="nav-item dropdown dropdown-large">
+                
+                <div class="dropdown-menu dropdown-menu-end p-0">
+                  
+                 <div class="p-2">
+                   <div><hr class="dropdown-divider"></div>
+                     <a class="dropdown-item" href="#">
+                       <div class="text-center">View All Notifications</div>
+                     </a>
+                 </div>
+                </div>
+              </li>
+              </ul>
+              </div>
+              <div class="dropdown dropdown-user-setting">
+                <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+                  <div class="user-setting d-flex align-items-center gap-3">
+                    {% if user.profile and user.profile.avatar %}
+                    <img src="{{ user.profile.avatar.url }}" class="user-img" alt="{{ user.username }} Avatar">
+                    {% else %}
+                    <img src="media/profiles/perfil.png" class="user-img" alt="">
+                    {% endif %}                      <div class="d-none d-sm-block">
+                          <p class="user-name mb-0">{{ user.username }}</p>
+                          <small class="mb-0 dropdown-user-designation">
+                              {% if user.coordinador %}
+                                  Coordinador
+                              {% elif user.asesor %}
+                                  Asesor
+                              {% else %}
+                                  Administrador
+                              {% endif %}
+                          </small>
+                      </div>
+                  </div>
+              </a>
+              
+              
+              
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                  <li>
+                    <a class="dropdown-item" href="{% url 'profile' %}">
+                        <div class="d-flex align-items-center" onclick="closeDropdown()">
+                            <div class=""><i class="bi bi-person-fill"></i></div>
+                            <div class="ms-3"><span>Perfil</span></div>
+                        </div>
+                    </a>
+                  </li>                
+                    <li>
+                      <a class="dropdown-item" href="#">
+                         <div class="d-flex align-items-center">
+                           <div class=""><i class="bi bi-gear-fill"></i></div>
+                           <div class="ms-3"><span>Ajustes</span></div>
+                         </div>
+                       </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="{% url 'dashboard' %}">
+                         <div class="d-flex align-items-center">
+                           <div class=""><i class="bi bi-speedometer"></i></div>
+                           <div class="ms-3"><span>Dashboard</span></div>
+                         </div>
+                       </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">
+                         <div class="d-flex align-items-center">
+                           <div class=""><i class="bi bi-check-square-fill"></i></div>
+                           <div class="ms-3"><span>Tareas</span></div>
+                         </div>
+                       </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">
+                         <div class="d-flex align-items-center">
+                           <div class=""><i class="bi bi-cloud-arrow-down-fill"></i></div>
+                           <div class="ms-3"><span>Descargas</span></div>
+                         </div>
+                       </a>
+                    </li>
+                    <li><hr class="dropdown-divider"></li>
+                    {% if user.is_authenticated %}
+                        <li>
+                          <a class="dropdown-item" href="{% url 'logout' %}">
+                            <div class="d-flex align-items-center">
+                              <div class=""><i class="bi bi-door-closed-fill"></i></div>
+                              <div class="ms-3"><span>Salir</span></div>
+                            </div>
+                          </a>
+                          
+                        </li>
+                    {% endif %}
+                  
+                </ul>
+              </div>
+        </nav>
+      </header>
+       <!--end top header-->
+
+        <!--start sidebar -->
+        <aside class="sidebar-wrapper" data-simplebar="true">
+          <div class="sidebar-header">
+            <div>
+              <img src="{% static 'assets/images/logo-icon.png' %}" class="logo-icon" alt="logo icon">
+            </div>
+            <div>
+              <h4 class="logo-text">QuevedoCRM</h4>
+            </div>
+            <div class="toggle-icon ms-auto"> <i class="bi bi-list"></i>
+            </div>
+          </div>
+          <!--navigation-->
+          <ul class="metismenu" id="menu">
+            <li>
+              <a href="{% url 'dashboard' %}">
+                <div class="parent-icon"><i class="bi bi-bar-chart"></i>
+                </div>
+                <div class="menu-title">Dashboard</div>
+              </a>
+            </li>
+            <li class="menu-label">Clientes</li>
+            {% comment %} <li>
+              <a href="{% url 'ver_clientes' %}">
+                <div class="parent-icon"><i class="bi bi-star"></i></div>
+                <div class="menu-title">Numeros Asignados</div>
+              </a>
+            </li> {% endcomment %}
+            <li>
+              <a href="{% url 'ver_clientes' %}">
+                <div class="parent-icon"><i class="bi bi-eye"></i>
+                </div>
+                <div class="menu-title">Ver Clientes</div>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'agregar_cliente' %}">
+                <div class="parent-icon"><i class="bi bi-person-plus"></i>
+                </div>
+                <div class="menu-title">Agregar Clientes</div>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'calendario' %}">
+                <div class="parent-icon"><i class="bi bi-calendar2-event"></i>
+                </div>
+                <div class="menu-title">Calendario de Visitas</div>
+              </a>
+            </li>
+              <a href="#">
+                  <div class="parent-icon"><i class="bi bi-person"></i></div>
+                  <div class="menu-title">Colaboradores</div>
+              </a>
+            <li>
+              <a href="#">
+                  <div class="parent-icon"><i class="bi bi-check-square-fill"></i></div>
+                  <div class="menu-title">Tareas</div>
+              </a>
+            </li>
+            <li>
+              <a href="https://medellin.corporacionquevedo.com" target="_blank">
+                  <div class="parent-icon"><i class="bi bi-geo-alt"></i></div>
+                  <div class="menu-title">Plano del Proyecto</div>
+              </a>
+            </li>
+            {% comment %} <li>
+              <a href="https://quevetrackmedellin.corporacionquevedo.com" target="_blank">
+                  <div class="parent-icon"><i class="bi bi-currency-dollar"></i></div>
+                  <div class="menu-title">Cuotas de los clientes</div>
+              </a>
+            </li> {% endcomment %}
+            <li>
+              <a href="https://wa.link/5bnccf" target="_blank">
+                  <div class="parent-icon"><i class="bi bi-telephone-fill"></i></div>
+                  <div class="menu-title">Soporte</div>
+              </a>
+            </li>
+          </ul>
+          <!--end navigation-->
+       </aside>
+       <!--end sidebar -->
+
+       <!--start content-->
+          <main class="page-content">
+            
+            {% block dashboard %}{% endblock %}
+            {% block table_clients %}{% endblock %}
+            {% block agregar_cliente %}{% endblock %}
+            {% block reporte_cliente %}{% endblock %}
+            {% block calendario %}{% endblock %}
+            {% block profile %}{% endblock %}
+
+          </main>
+       <!--end page main-->
+
+       <!--start overlay-->
+        <div class="overlay nav-toggle-icon"></div>
+       <!--end overlay-->
+
+       <!--start footer-->
+       {% comment %} <footer class="footer">
+        <div class="footer-text">
+           Copyright © 2022. All right reserved.
+        </div>
+        </footer> {% endcomment %}
+        <!--end footer-->
+
+
+       <!--Start Back To Top Button-->
+		     <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+       <!--End Back To Top Button-->
+
+       <!--start switcher-->
+       <div class="switcher-body">
+        <button class="btn btn-primary btn-switcher shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="bi bi-paint-bucket me-0"></i></button>
+        <div class="offcanvas offcanvas-end shadow border-start-0 p-2" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling">
+          <div class="offcanvas-header border-bottom">
+            <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Theme Customizer</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
+          </div>
+          <div class="offcanvas-body">
+            <h6 class="mb-0">Theme Variation</h6>
+            <hr>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="LightTheme" value="option1">
+              <label class="form-check-label" for="LightTheme">Light</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="DarkTheme" value="option2">
+              <label class="form-check-label" for="DarkTheme">Dark</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="SemiDarkTheme" value="option3">
+              <label class="form-check-label" for="SemiDarkTheme">Semi Dark</label>
+            </div>
+            <hr>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="MinimalTheme" value="option3" checked>
+              <label class="form-check-label" for="MinimalTheme">Minimal Theme</label>
+            </div>
+            <hr/>
+            <h6 class="mb-0">Header Colors</h6>
+            <hr/>
+            <div class="header-colors-indigators">
+              <div class="row row-cols-auto g-3">
+                <div class="col">
+                  <div class="indigator headercolor1" id="headercolor1"></div>
+                </div>
+                <div class="col">
+                  <div class="indigator headercolor2" id="headercolor2"></div>
+                </div>
+                <div class="col">
+                  <div class="indigator headercolor3" id="headercolor3"></div>
+                </div>
+                <div class="col">
+                  <div class="indigator headercolor4" id="headercolor4"></div>
+                </div>
+                <div class="col">
+                  <div class="indigator headercolor5" id="headercolor5"></div>
+                </div>
+                <div class="col">
+                  <div class="indigator headercolor6" id="headercolor6"></div>
+                </div>
+                <div class="col">
+                  <div class="indigator headercolor7" id="headercolor7"></div>
+                </div>
+                <div class="col">
+                  <div class="indigator headercolor8" id="headercolor8"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+       </div>
+       <!--end switcher-->
+
+  </div>
+  <!--end wrapper-->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
+    <script src="{% static 'assets/js/datatables-simple-demo.js' %}"></script>
+    <!-- Bootstrap bundle JS -->
+    <script src="{% static 'assets/js/bootstrap.bundle.min.js' %}"></script>
+    <!--plugins-->
+    <script src="{% static 'assets/js/jquery.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/simplebar/js/simplebar.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/metismenu/js/metisMenu.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/perfect-scrollbar/js/perfect-scrollbar.js' %}"></script>
+    <script src="{% static 'assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/vectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
+    <script src="{% static 'assets/js/pace.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/chartjs/js/Chart.min.js' %}"></script>
+    <script src="{% static 'assets/plugins/chartjs/js/Chart.extension.js' %}"></script>
+    <script src="{% static 'assets/plugins/apexcharts-bundle/js/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets/js/app.js' %}"></script>
+    <script src="{% static 'assets/js/index.js' %}"></script>
+    <script src="{% static 'assets/js/scripts.js' %}"></script>
+    <script src="{% static 'js/scripts.js' %}"></script>
+    <script src="{% static 'js/datatables-simple-demo.js' %}"></script>
+    <script src="{% static 'js/datatables-demo.js' %}"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <script>
+        new PerfectScrollbar(".best-product");
+    </script>    
+    <script>
+      function closeDropdown() {
+        // Obtén el elemento del menú desplegable
+        var dropdown = document.querySelector('.dropdown-user-setting');
+        
+        // Cierra el menú desplegable si está abierto
+        if (dropdown.classList.contains('show')) {
+          dropdown.classList.remove('show');
+        }
+      }
+    </script>
+</body>
+</html>
+
+{% comment %} <nav>
+    <ul>
+        <li><a href="{% url 'ver_clientes' %}">Ver Clientes</a></li>
+        <li><a href="{% url 'agregar_cliente' %}">Agregar Cliente</a></li>
+    </ul>
+</nav>
+
+<div id="content">
+    {% block content %}{% endblock %}
+</div>  {% endcomment %}
+

@@ -1,0 +1,629 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block agregar_cliente %}
+<!--start content-->  
+<div class="row row-cols-1 row-cols-lg-2 row-cols-xl-2 row-cols-xxl-4">
+  <div class="col">
+    <div class="card overflow-hidden rounded-4">
+        <div class="card-body p-2">
+          <div class="d-flex align-items-stretch justify-content-between  rounded-4 overflow-hidden bg-primary">
+          <div class="w-50 p-3">
+            <p class="text-white">Total Clientes</p>
+            <h4 class="text-white">{{ total_clientes }}</h4>
+          </div>
+          <div class="w-50 p-3">
+            {% if porcentaje_clientes >= 0 %}
+                <p class="mb-3 text-white text-end">+{{ porcentaje_clientes }}% <i class="bi bi-arrow-up"></i></p>
+            {% else %}
+                <p class="mb-3 text-white text-end">{{ porcentaje_clientes }}% <i class="bi bi-arrow-down"></i></p>
+            {% endif %}
+            <div id="chart1"></div>
+        </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+    <div class="card overflow-hidden  rounded-4">
+        <div class="card-body p-2">
+          <div class="d-flex align-items-stretch justify-content-between rounded-4 overflow-hidden bg-primary">
+          <div class="w-50 p-3">
+            <p class="text-white">Total Reportes</p>
+            <h4 class="text-white">{{ total_reportes }}</h4>
+          </div>
+            <div class="w-50 p-3">
+              {% if porcentaje_clientes >= 0 %}
+              <p class="mb-3 text-white text-end">+{{ porcentaje_reportes }}% <i class="bi bi-arrow-up"></i></p>
+              {% else %}
+              <p class="mb-3 text-white text-end">{{ porcentaje_reportes }}% <i class="bi bi-arrow-down"></i></p>
+              {% endif %}
+              <div id="chart2"></div>
+            </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+    <div class="card overflow-hidden rounded-4">
+        <div class="card-body p-2">
+          <div class="d-flex align-items-stretch justify-content-between rounded-4 overflow-hidden bg-primary">
+          <div class="w-50 p-3">
+            <p class="text-white">Colaboradores</p>
+            <h4 class="text-white">{{ total_usuarios }}</h4>
+          </div>
+          <div class="w-50 p-3">
+              <p class="mb-3 text-white text-end">+100% <i class="bi bi-arrow-up"></i></p>
+              <div id="chart3"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+    <div class="card overflow-hidden rounded-4">
+        <div class="card-body p-2">
+          <div class="d-flex align-items-stretch justify-content-between rounded-4 overflow-hidden bg-primary">
+          <div class="w-50 p-3 bg-light-primary">
+            <p class="text-white">Total Ventas</p>
+            <h4 class="text-white">{{ total_ventas_exitosas }}</h4>
+          </div>
+            <div class="w-50 p-3">
+              {% if porcentaje_clientes >= 0 %}
+              <p class="mb-3 text-white text-end">+{{ porcentaje_clientes_cerrados_exitosos }}% <i class="bi bi-arrow-up"></i></p>
+              {% else %}
+              <p class="mb-3 text-white text-end">{{ porcentaje_clientes_cerrados_exitosos }}% <i class="bi bi-arrow-down"></i></p>
+              {% endif %}
+            <div id="chart4"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+  </div><!--end row-->
+
+<div class="row row-cols-1 row-cols-lg-3 justify-content-center">
+    {% comment %} <div class="col d-flex">
+      <div class="card radius-10 w-100 overflow-hidden">
+        <div class="card-body">
+          <div class="d-flex align-items-center">
+            <h6 class="mb-0">Ventas</h6>
+            <div class="fs-5 ms-auto">
+              <div class="d-flex align-items-center justify-content-sm-end gap-3 cursor-pointer">
+                <div class="font-13"><i class="bi bi-circle-fill text-primary"></i><span class="ms-2">iPad</span></div>
+                <div class="font-13"><i class="bi bi-circle-fill text-primary-2"></i><span class="ms-2">Mob</span></div>
+                <div class="font-13"><i class="bi bi-circle-fill text-primary-3"></i><span class="ms-2">Lap</span></div>
+              </div>
+              </div>
+          </div>
+        </div>
+        <div id="chart5"></div>
+      </div>
+    </div> {% endcomment %}
+    <div class="col d-flex">
+    <div class="card rounded-4 overflow-hidden w-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <h6 class="mb-0">Seguimiento</h6>
+          <div class="fs-5 ms-auto dropdown">
+            <div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></div>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+          </div>
+        </div>
+        <div class="by-device-container p-3">
+          <canvas id="chartseguimiento"></canvas>
+        </div>
+      </div>
+      <ul id="seguimiento-list" class="list-group list-group-flush">
+        <!-- Aquí se insertarán dinámicamente los elementos de la lista -->
+      </ul>
+      
+      
+      
+    </div>
+    
+    
+  </div>
+  <div class="col-12 col-lg-6 d-flex">
+    <div class="card rounded-3 w-100">
+      <div class="card-header bg-transparent border-0">
+        <div class="row g-3 align-items-center">
+          <div class="col">
+            <h6 class="mb-0">Origen del Prospecto</h6>
+          </div>
+          <div class="col">
+            <div class="d-flex align-items-center justify-content-end gap-3 cursor-pointer">
+              <div class="dropdown">
+                <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded font-22 text-option"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="javascript:;">Action</a>
+                  </li>
+                  <li><a class="dropdown-item" href="javascript:;">Another action</a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="javascript:;">Something else here</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      <div class="card-body p-0">
+        <div class="p-2 mb-3" id="origen-list">
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  {% comment %} <div class="col d-flex">
+    <div class="card radius-10 w-100">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <h6 class="mb-0">Traffic</h6>
+          <div class="fs-5 ms-auto">
+            <div class="d-flex align-items-center justify-content-sm-end gap-3 cursor-pointer">
+              <div class="font-13"><i class="bi bi-circle-fill text-primary"></i><span class="ms-2">Referral</span></div>
+              <div class="font-13"><i class="bi bi-circle-fill text-primary-3"></i><span class="ms-2">Search</span></div>
+            </div>
+            </div>
+          </div>
+          <div id="chart7"></div>
+      </div>
+    </div>
+  </div> {% endcomment %}
+</div><!--end row-->
+
+<div class="row">
+  {% comment %} <div class="col-12 col-lg-6 d-flex">
+    <div class="card rounded-4 w-100">
+      <div class="card-header bg-transparent border-0">
+        <div class="row g-3 align-items-center">
+          <div class="col">
+            <h6 class="mb-0">Top Sold</h6>
+          </div>
+          <div class="col">
+            <div class="d-flex align-items-center justify-content-end gap-3 cursor-pointer">
+              <div class="dropdown">
+                <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown" aria-expanded="false"><i class="bx bx-dots-horizontal-rounded font-22 text-option"></i>
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="javascript:;">Action</a>
+                  </li>
+                  <li><a class="dropdown-item" href="javascript:;">Another action</a>
+                  </li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="javascript:;">Something else here</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+      <div class="card-body p-0">
+          <div class="best-product p-2 mb-3">
+            <div class="best-product-item">
+              <div class="d-flex align-items-center gap-3">
+                <div class="product-box border">
+                  <img src="assets/images/products/01.png" alt="">
+                </div>
+                <div class="product-info flex-grow-1">
+                <div class="progress-wrapper">
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 80%;"></div>
+                  </div>
+                </div>
+                  <p class="product-name mb-0 mt-2 fs-6">White Polo T-Shirt <span class="float-end">245</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="best-product-item">
+            <div class="d-flex align-items-center gap-3">
+              <div class="product-box border">
+                  <img src="assets/images/products/02.png" alt="">
+              </div>
+              <div class="product-info flex-grow-1">
+                <div class="progress-wrapper">
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%;"></div>
+                  </div>
+                </div>
+                <p class="product-name mb-0 mt-2 fs-6">Black Coat Pant <span class="float-end">245</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="best-product-item">
+            <div class="d-flex align-items-center gap-3">
+              <div class="product-box border">
+                  <img src="assets/images/products/03.png" alt="">
+              </div>
+              <div class="product-info flex-grow-1">
+                <div class="progress-wrapper">
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 60%;"></div>
+                  </div>
+                </div>
+                <p class="product-name mb-0 mt-2 fs-6">Blue Shade Jeans <span class="float-end">245</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="best-product-item">
+            <div class="d-flex align-items-center gap-3">
+              <div class="product-box border">
+                  <img src="assets/images/products/04.png" alt="">
+              </div>
+              <div class="product-info flex-grow-1">
+                <div class="progress-wrapper">
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 50%;"></div>
+                  </div>
+                </div>
+                <p class="product-name mb-0 mt-2 fs-6">Yellow Winter Jacket <span class="float-end">245</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="best-product-item">
+            <div class="d-flex align-items-center gap-3">
+              <div class="product-box border">
+                  <img src="assets/images/products/05.png" alt="">
+              </div>
+              <div class="product-info flex-grow-1">
+                <div class="progress-wrapper">
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 40%;"></div>
+                  </div>
+                </div>
+                <p class="product-name mb-0 mt-2 fs-6">Men Sports Shoes Nike <span class="float-end">245</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="best-product-item">
+            <div class="d-flex align-items-center gap-3">
+              <div class="product-box border">
+                  <img src="assets/images/products/06.png" alt="">
+              </div>
+              <div class="product-info flex-grow-1">
+                <div class="progress-wrapper">
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 30%;"></div>
+                  </div>
+                </div>
+                <p class="product-name mb-0 mt-2 fs-6">Fancy Home Sofa <span class="float-end">245</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="best-product-item">
+            <div class="d-flex align-items-center gap-3">
+              <div class="product-box border">
+                  <img src="assets/images/products/07.png" alt="">
+              </div>
+              <div class="product-info flex-grow-1">
+                <div class="progress-wrapper">
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 20%;"></div>
+                  </div>
+                </div>
+                <p class="product-name mb-0 mt-2 fs-6">Sports Time Watch <span class="float-end">245</span></p>
+              </div>
+            </div>
+          </div>
+          <div class="best-product-item">
+            <div class="d-flex align-items-center gap-3">
+              <div class="product-box border">
+                  <img src="assets/images/products/08.png" alt="">
+              </div>
+              <div class="product-info flex-grow-1">
+                <div class="progress-wrapper">
+                  <div class="progress" style="height: 5px;">
+                    <div class="progress-bar bg-primary" role="progressbar" style="width: 10%;"></div>
+                  </div>
+                </div>
+                <p class="product-name mb-0 mt-2 fs-6">Women Blue Heals <span class="float-end">245</span></p>
+              </div>
+            </div>
+          </div>
+          </div>
+      </div>
+    </div>
+  </div> {% endcomment %}
+  <div class="col-12 col-lg-12 d-flex">
+    <div class="card rounded-4 w-100 overflow-hidden">
+      <div class="card-body">
+        <div class="d-flex align-items-center">
+          <h6 class="mb-0">Reportes</h6>
+          <div class="fs-5 ms-auto dropdown">
+              <div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer" data-bs-toggle="dropdown"><i class="bi bi-three-dots"></i></div>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="#">Action</a></li>
+                  <li><a class="dropdown-item" href="#">Another action</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#">Something else here</a></li>
+                </ul>
+            </div>
+          </div>
+        <div id="chart8"></div>
+        <div class="d-flex align-items-center gap-5 justify-content-center mt-0 p-2 bg-light radius-10 border"> 
+          <div class="text-center">
+            <h2 class="mb-2 text-success">{{ total_reportes }}</h2>
+            <p class="mb-0">Total <br> Reportes</p>
+          </div>
+          <div class="border-end sepration"></div>
+          <div class="text-center">
+            <h2 class="mb-2">{{ promedio_valor_asociado|default:"N/A" }}</h2>
+            <p class="mb-0">AVG por <br> Reporte</p>
+        </div>
+    
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!--end row-->
+
+<div class="card radius-10 w-100 mb-0">
+  <div class="card-body">
+    <div class="d-flex align-items-center">
+      <h6 class="mb-0">Ventas Recientes</h6>
+      <div class="fs-5 ms-auto dropdown">
+          <div class="dropdown-toggle dropdown-toggle-nocaret cursor-pointer" data-bs-toggle="dropdown">
+              <i class="bi bi-three-dots"></i>
+          </div>
+          <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Acción</a></li>
+              <li><a class="dropdown-item" href="#">Otra acción</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Algo más aquí</a></li>
+          </ul>
+      </div>
+  </div>
+  
+  <div class="table-responsive mt-2">
+    <table class="table align-middle mb-0">
+        <thead class="table-light">
+            <tr>
+                <th>Posicion</th>
+                <th>Nombre de Usuario</th>
+                <th>Número de Ventas Exitosas</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for asesor in asesores %}
+                <tr>
+                    <td>
+                        {% if forloop.counter == 1 %}
+                            <i class="fas fa-trophy text-gold"></i>
+                        {% elif forloop.counter == 2 %}
+                            <i class="fas fa-trophy text-silver"></i>
+                        {% elif forloop.counter == 3 %}
+                            <i class="fas fa-trophy text-bronze"></i>
+                        {% else %}
+                            {{ forloop.counter }}
+                        {% endif %}
+                    </td>
+                    <td>{{ asesor.usuario.username }}</td>
+                    <td>{{ asesor.num_ventas_exitosas }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <table class="table align-middle mb-0">
+      <thead class="table-light">
+          <tr>
+              <th>Posicion</th>
+              <th>Nombre de Usuario</th>
+              <th>Número de Ventas Exitosas</th>
+          </tr>
+      </thead>
+      <tbody>
+          {% for coordinador in coordinadores %}
+              <tr>
+                  <td>
+                      {% if forloop.counter == 1 %}
+                          <i class="fas fa-trophy text-gold"></i>
+                      {% elif forloop.counter == 2 %}
+                          <i class="fas fa-trophy text-silver"></i>
+                      {% elif forloop.counter == 3 %}
+                          <i class="fas fa-trophy text-bronze"></i>
+                      {% else %}
+                          {{ forloop.counter }}
+                      {% endif %}
+                  </td>
+                  <td>{{ coordinador.usuario.username }}</td>
+                  <td>{{ coordinador.num_ventas_exitosas }}</td>
+              </tr>
+          {% endfor %}
+      </tbody>
+  </table>
+</div>
+</div>
+
+
+<style>
+  /* Estilo para el ícono de oro */
+  .text-gold {
+      color: #ffd700; /* Código de color dorado */
+  }
+
+  /* Estilo para el ícono de plata */
+  .text-silver {
+      color: #c0c0c0; /* Código de color plateado */
+  }
+
+  /* Estilo para el ícono de bronce */
+  .text-bronze {
+      color: #cd7f32; /* Código de color bronce */
+  }
+</style>
+
+
+  
+  
+  
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  // Obtén las opciones de seguimiento desde el contexto de Django
+  var seguimientoChoices = {{ seguimiento_choices|safe }};
+  
+  // Obtén los porcentajes de seguimiento desde el contexto de Django
+  var porcentajesSeguimiento = {{ porcentajes_seguimiento|safe }};
+  
+  // Obtén el contenedor de la lista
+  var listaContainer = document.getElementById('seguimiento-list');
+  
+  // Limpia el contenido existente del contenedor
+  listaContainer.innerHTML = '';
+  
+  // Itera sobre las opciones de seguimiento y sus porcentajes
+  for (var i = 0; i < seguimientoChoices.length; i++) {
+      // Crea un nuevo elemento de lista
+      var listItem = document.createElement('li');
+      listItem.className = 'list-group-item bg-transparent';
+  
+      // Crea la estructura interna del elemento de lista
+      listItem.innerHTML = `
+        <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center">
+            <i class="bi bi bi-check-circle me-2 text-primary"></i>
+            <span>${seguimientoChoices[i]}</span>
+          </div>
+          <span>${porcentajesSeguimiento[i].toFixed(2)}%</span>
+        </div>
+      `;
+  
+      // Agrega el elemento de lista al contenedor
+      listaContainer.appendChild(listItem);
+  }
+
+  var chartData = {
+    labels: seguimientoChoices, // Agrega el porcentaje a las etiquetas
+    datasets: [{
+      label: "cantidad",
+      backgroundColor: ["#F17105", "#0496FF", "#34D1BF", "#6665DD", "#ED0423", "#F105E8", "#11C80D", "#aed6f1"],
+      data: {{ cantidades_seguimiento }},
+    }]
+  };
+  
+  
+
+  var chartOptions = {
+    maintainAspectRatio: false,
+    cutoutPercentage: 77,
+    legend: {
+      position: 'bottom',
+      display: false,
+      labels: {
+        boxWidth: 8
+      }
+    },
+    tooltips: {
+      displayColors: false,
+    }
+  };
+
+  var otroNombreChart = new Chart(document.getElementById('chartseguimiento'), {
+    type: 'doughnut',
+    data: chartData,
+    options: chartOptions
+  });
+</script>
+
+<script>
+  // Obtén las opciones de origen desde el contexto de Django
+  var origenChoices = {{ origen_choices|safe }};
+  
+  // Obtén las cantidades de origen desde el contexto de Django
+  var cantidadesOrigen = {{ cantidades_origen|safe }};
+  
+  // Obtén el contenedor de la lista
+  var listaContainer = document.getElementById('origen-list');
+  
+  // Limpia el contenido existente del contenedor
+  listaContainer.innerHTML = '';
+  
+  // Itera sobre las opciones de origen y sus cantidades
+  for (var i = 0; i < origenChoices.length; i++) {
+    // Crea un nuevo elemento de lista
+    var listItem = document.createElement('div');
+    listItem.className = 'best-product-item text-center'; // Agrega la clase text-center para centrar el contenido
+
+    // Selecciona el icono correspondiente al origen
+    var iconoOrigen = obtenerIconoOrigen(origenChoices[i]);
+
+    // Depuración: Registra información sobre la iteración actual
+    console.log('Índice:', i, 'Origen:', origenChoices[i], 'Icono:', iconoOrigen);
+  
+    // Crea la estructura interna del elemento de lista
+    listItem.innerHTML = `
+      <div class="d-flex align-items-center gap-3">
+        <i class="${iconoOrigen}"></i>
+        <div class="product-info flex-grow-1">
+          <div class="progress-wrapper">
+            <div class="progress" style="height: 5px;">
+              <div class="progress-bar bg-primary" role="progressbar" style="width: ${cantidadesOrigen[i]/7}%;"></div>
+            </div>
+          </div>
+          <p class="product-name mb-0 mt-2 fs-6">
+            <span class="text-muted">${origenChoices[i]}</span>
+            <span class="float-end">${cantidadesOrigen[i]}</span>
+          </p>
+        </div>
+      </div>
+    `;
+  
+    // Agrega el elemento de lista al contenedor
+    listaContainer.appendChild(listItem);
+  }
+
+  // Función para obtener el icono correspondiente al origen
+  function obtenerIconoOrigen(origen) {
+    // Definir un diccionario de mapeo entre origen y icono
+    var iconosOrigen = {
+      'pagina_web': 'bi bi-globe',
+      'facebook': 'bi bi-facebook',
+      'instagram': 'bi bi-instagram',
+      'tiktok': 'bi bi-play-btn',
+      'meet': 'bi bi-camera-video', 
+      'marketplace': 'bi bi-shop',
+      'contacto_referencial': 'bi bi-person-check',  
+      'publicidad_pagada': 'bi bi-megaphone',
+      'otros': 'bi bi-three-dots',
+    };
+    
+    
+
+    // Obtén el icono correspondiente al origen
+    var icono = iconosOrigen[origen.toLowerCase()] || 'bi bi-globe';
+
+    // Imprime en la consola para depuración
+    console.log('Origen:', origen, 'Icono:', icono);
+
+    // Si el icono es 'bi bi-question', registra un mensaje de advertencia
+    if (icono === 'bi bi-globe') {
+      console.warn('Icono no encontrado para el origen:', origen);
+    }
+
+    // Devuelve el icono correspondiente al origen
+    return icono;
+  }
+</script>
+
+
+
+
+{% endblock %}
+
+<!-- Añade esto al final de tu código HTML -->

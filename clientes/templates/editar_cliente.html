@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+
+{% load static %}
+fas fa-user-plus
+{% block agregar_cliente %}
+<main>
+    <div class="container-fluid px-4">
+
+        <h1 class="mt-4">
+            <i class="fas fa-edit ml-2"></i>
+            Editar Cliente
+        </h1>              
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item"><a href="{% url 'ver_clientes' %}">Ver Clientes</a></li>
+            <li class="breadcrumb-item active">Tables</li>
+        </ol>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Formulario
+            </div>
+            <form class="card" method="post" action="{% url 'editar_cliente' cliente_id=cliente.id %}">
+                {% csrf_token %}
+                <div class="card-body">
+                    <div class="border p-4 rounded">
+                        <div class="card-title d-flex align-items-center">
+                            <h5 class="mb-0">Datos del Cliente</h5>
+                        </div>
+                        <hr/>
+                    <div class="row mb-3">
+                        <label for="inputEmailAddress2" class="col-sm-3 col-form-label">{{ form.celular.label_tag }}</label>
+                        <div class="col-sm-9">
+                            {{ form.celular }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputEnterYourName" class="col-sm-3 col-form-label">{{ form.nombre_completo.label_tag }}</label>
+                        <div class="col-sm-9">
+                            {{ form.nombre_completo }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPhoneNo2" class="col-sm-3 col-form-label">{{ form.lugar_de_origen.label_tag }}</label>
+                        <div class="col-sm-9">
+                            {{ form.lugar_de_origen }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputPhoneNo2" class="col-sm-3 col-form-label">{{ form.dni.label_tag }}</label>
+                        <div class="col-sm-9">
+                            {{ form.dni }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputEmailAddress2" class="col-sm-3 col-form-label">{{ form.motivo_de_compra.label_tag }}</label>
+                        <div class="col-sm-9"> 
+                            {{ form.motivo_de_compra }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputChoosePassword2" class="col-sm-3 col-form-label">Procedencia del prospecto:</label>
+                        <div class="col-sm-9">
+                            {{ form.origen_del_prospecto }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputConfirmPassword2" class="col-sm-3 col-form-label">{{ form.seguimiento.label_tag }}</label>
+                        <div class="col-sm-9">
+                            {{ form.seguimiento }}
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputAddress4" class="col-sm-3 col-form-label">{{ form.descripcion.label_tag }}</label>
+                        <div class="col-sm-9">
+                            {{ form.descripcion }}
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <label class="col-sm-3 col-form-label"></label>
+                        <div class="col-sm-9">
+                            <button type="submit" class="btn btn-primary px-5">Agregar Cliente</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="container mt-4">
+                
+            </div>
+            
+      </div>
+  </div>
+</main>
+<footer class="py-4 bg-light mt-auto">
+    <div class="container-fluid px-4">
+        <div class="d-flex align-items-center justify-content-between small">
+            <div class="text-muted">Derechos de autor &copy; Tu sitio web 2023</div>
+            <div>
+                <a href="#">Politica de privacidad</a>
+                &middot;
+                <a href="#">Terminos &amp; Condiciones</a>
+            </div>
+        </div>
+    </div>
+  </footer>
+{% endblock %}
+
+
+
